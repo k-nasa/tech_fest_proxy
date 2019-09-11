@@ -1,7 +1,11 @@
 #![feature(async_closure)]
 
 async fn circles(_: tide::Context<()>) -> tide::EndpointResult {
-    Ok(tide::response::json(""))
+    let mut res = surf::get("https://techbookfest.org/api/circle?eventID=tbf07&limit=642").await.unwrap();
+    let json_string = res.body_string().await.unwrap();
+    let data: serde_json::Value = serde_json::from_str(&json_string).unwrap();
+
+    Ok(tide::response::json(data))
 }
 
 fn main() {
