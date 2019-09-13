@@ -4,19 +4,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 struct Circles {
-    pub list: Vec<Circle>
+    list: Vec<Circle>
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all(serialize = "camelCase", deserialize = "camelCase"))]
 struct Circle {
-    pub id: String,
-    pub name: String,
-    pub name_ruby: String,
-    pub pen_name: String,
-    pub genre: String,
-    pub genre_free_format: String,
-    pub circle_cut_image: Option<CircleCutImage>,
+    id: String,
+    name: String,
+    name_ruby: String,
+    pen_name: String,
+    genre: String,
+    genre_free_format: String,
+    circle_cut_image: Option<CircleCutImage>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
