@@ -25,10 +25,9 @@ struct CircleCutImage {
 }
 
 async fn circles(_: tide::Context<()>) -> tide::EndpointResult {
-    let mut res = surf::get("https://techbookfest.org/api/circle?eventID=tbf07&limit=642").await.unwrap();
+    const JSON: &str = include_str!("assets/circles.json");
 
-    let json_string = res.body_string().await.unwrap();
-    let data: serde_json::Value = serde_json::from_str(&json_string).unwrap();
+    let data: serde_json::Value = serde_json::from_str(JSON).unwrap();
     let circles: Circles = serde_json::from_value(data.clone()).unwrap();
 
 
