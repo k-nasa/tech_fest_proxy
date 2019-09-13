@@ -37,6 +37,7 @@ async fn circles(_: tide::Context<()>) -> tide::EndpointResult {
 fn main() {
     let mut app = tide::App::new();
 
+    app.at("/").get(|_| async move { "hello world"});
     app.at("/api/circles").get(circles);
     app.run("127.0.0.1:8080").unwrap();
 }
