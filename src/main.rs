@@ -1,6 +1,8 @@
 #![feature(async_closure)]
 
 use serde::{Deserialize, Serialize};
+use http::header::HeaderValue;
+use tide::middleware::{CorsOrigin, CorsMiddleware};
 
 #[derive(Debug, Serialize, Deserialize)]
 struct Circles {
@@ -64,8 +66,18 @@ async fn product(cx: tide::Context<()>) -> tide::EndpointResult {
 fn main() {
     let mut app = tide::App::new();
 
+    let cors = CorsMiddleware::new()
+        .allow_origin(CorsOrigin::Any)
+        .allow_methods(HeaderValue::from_static("GET"));
+
+    app.middleware(cors);
     app.at("/").get(|_| async move { "hello world"});
-    app.at("/api/circles").get(circles);
-    app.at("/api/product/:id").get(product);
+
+    // FIXME refactor to nested route
+    app.at("/api").nest(|api| {
+        api.at("/circles").get(circles);
+        api.at("/product/:id").get(product);
+    });
+
     app.run("127.0.0.1:8080").unwrap();
 }
