@@ -10,3 +10,5 @@ edition = "2018"
 tide={git = "https://github.com/rustasync/tide"}
 surf = "1.0.2"
 serde_json = "1.0.40"
+serde = "1.0.100"
+failure = "0.1.5"
