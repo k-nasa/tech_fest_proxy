@@ -1,3 +1,4 @@
 lazy_up:
-	cargo build --release 
-	./target/debug/tech_fest_proxy
+	cargo build --release
+	systemctl daemon-reload
+	systemctl restart nasa-tech.service

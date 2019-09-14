@@ -1,0 +1,12 @@
+[Unit]
+Description = Nasa tech-fest rust api
+
+[Service]
+User = root
+Type = simple
+ExecStart = /root/tech_fest_proxy/target/release/tech_fest_proxy
+WorkingDirectory = /root/tech_fest_proxy/target/release
+Restart = always
+
+[Install]
+WantedBy = multi-user.target
